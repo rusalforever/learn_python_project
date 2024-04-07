@@ -1,0 +1,31 @@
+
+     [
+        {
+            "title": "Гамлет",
+            "author": "Вильям Шекспир",
+            "year": "1603"
+        },
+        {
+            "title":"Изучаем Python",
+            "author":"Эрик Мэтиз",
+            "year": "2020"
+        },
+        {
+            "title": "Ромэо и Джульетта",
+            "author": "Вильям Шекспир",
+            "year": "1597"
+        },
+        {
+            "title": "Nature",
+            "author": "Nature publishing group",
+            "year": "1869",
+            "edition": "10"
+        },
+        {
+            "title": "Medical",
+            "author": "World Helth Organization",
+            "year": "1948",
+            "edition": "1010"
+        }
+    ]
+
