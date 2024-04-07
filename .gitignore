@@ -1,3 +1,5 @@
 .ruff_cachetry init
 
 .idea/
+/venv/
+.DS_Store
