@@ -109,86 +109,85 @@ class Library:
                         self.add_book(book)
         except Exception as e:
             print(f'Error add: {e}')
-
-journal_1 = {'name': 'Forbes',
-          'author': 'Charlz',
-          'year': 2005,
-          'edition':88
-}
-
-book_1 = {'name': 'Mavka',
-          'author': 'Ukrayinka',
-          'year': 2020,
-}
-book_2 = {'name': 'Zapovit',
-          'author': 'Shevchenko',
-          'year': 2020,
-}
-
-book_3 = {'name': 'Kobzar',
-          'author': 'Shevchenko',
-          'year': 2021,
-}
-
-    if __name__ == '__main__':
-        print('**** Add book or journal *****')
-        lib = Library()
-        journal_model = JournalModel(**journal_1)
-        journal = Journal(journal_model)
-        lib.add_book(journal)
-        print()
-
-        print('**** Add book or journal *****')
-        book_model = BookModel(**book_1)
-        book = Book(book_model)
-        lib.add_book(book)
-        print()
-
-        print('**** Add book or journal *****')
-        book_model = BookModel(**book_2)
-        book = Book(book_model)
-        lib.add_book(book)
-        print()
-        print()
-        print('**** Add book or journal *****')
-        book_model = BookModel(**book_3)
-        book = Book(book_model)
-        lib.add_book(book)
-        print( '\t' * 3, ' **** Show entire library*****')
-        lib.show_library()
-
-
-        #
-        print()
-        print('**** Search for a book or journal by author *****')
-        lib.get_item_by_author('Shevchenko') #input АВТОРА
-        #
-        print()
-        print('**** Saving to file *****')
-        lib.save_list_book_journal()
-        #
-        print()
-        print('**** Removing a book from the library *****')
-        lib.delete_book_or_journal('Mavka')
-        #
-        print()
-        print('**** Displaying a list of books or journals after deletion *****')
-        lib.show_library()
-        #
-        print()
-        print('**** Clear entire library *****')
-        lib.show_list_books_after_deletion()
-        #
-        print()
-        print('**** Displaying a list of books of journals after deletion *****')
-        lib.show_library()
-        #
-        print()
-        print('**** Adding books of journals from a file *****')
-        lib.add_books_is_file()
-
-        print()
-        print('**** Show entire library *****')
-        lib.show_library()
+if __name__ == '__main__':
+    journal_1 = {'name': 'Forbes',
+              'author': 'Charlz',
+              'year': 2005,
+              'edition':88
+    }
+    
+    book_1 = {'name': 'Mavka',
+              'author': 'Ukrayinka',
+              'year': 2020,
+    }
+    book_2 = {'name': 'Zapovit',
+              'author': 'Shevchenko',
+              'year': 2020,
+    }
+    
+    book_3 = {'name': 'Kobzar',
+              'author': 'Shevchenko',
+              'year': 2021,
+    }
+    
+    print('**** Add book or journal *****')
+    lib = Library()
+    journal_model = JournalModel(**journal_1)
+    journal = Journal(journal_model)
+    lib.add_book(journal)
+    print()
+    
+    print('**** Add book or journal *****')
+    book_model = BookModel(**book_1)
+    book = Book(book_model)
+    lib.add_book(book)
+    print()
+    
+    print('**** Add book or journal *****')
+    book_model = BookModel(**book_2)
+    book = Book(book_model)
+    lib.add_book(book)
+    print()
+    print()
+    print('**** Add book or journal *****')
+    book_model = BookModel(**book_3)
+    book = Book(book_model)
+    lib.add_book(book)
+    print( '\t' * 3, ' **** Show entire library*****')
+    lib.show_library()
+    
+    
+    #
+    print()
+    print('**** Search for a book or journal by author *****')
+    lib.get_item_by_author('Shevchenko') #input АВТОРА
+    #
+    print()
+    print('**** Saving to file *****')
+    lib.save_list_book_journal()
+    #
+    print()
+    print('**** Removing a book from the library *****')
+    lib.delete_book_or_journal('Mavka')
+    #
+    print()
+    print('**** Displaying a list of books or journals after deletion *****')
+    lib.show_library()
+    #
+    print()
+    print('**** Clear entire library *****')
+    lib.show_list_books_after_deletion()
+    #
+    print()
+    print('**** Displaying a list of books of journals after deletion *****')
+    lib.show_library()
+    #
+    print()
+    print('**** Adding books of journals from a file *****')
+    lib.add_books_is_file()
+    
+    print()
+    print('**** Show entire library *****')
+    lib.show_library()
 
 
