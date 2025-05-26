@@ -1,9 +1,7 @@
 from datetime import (
     date,
-    datetime,
 )
 
-from dateutil.relativedelta import relativedelta
 from pydantic import (
     BaseModel,
     EmailStr,
@@ -21,7 +19,7 @@ class User(BaseModel):
     @computed_field
     @property
     def age(self) -> int:
-        return relativedelta(datetime.now(), self.birth_date).years
+        return date.today().year - self.birth_date.year
 
     @field_validator('email')
     def validate_domain_zone(cls, value):
