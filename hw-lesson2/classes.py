@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+import json
 
 
 # Decorators
@@ -7,16 +8,13 @@ def log_book_addition(func):
         if isinstance(book, Book):
             print(f"[BOOK_ADDITION] Додання книги: '{book.name}' (Автор: {book.author}, Рік: {book.year})")
             return func(self, book, *args, **kwargs)
-        else:
-            print(f"[BOOK_ADDITION_ERROR] Спроба додати об'єкт типу {type(book)} до бібліотеки.")
-            return None
-    return wrapper
+        return None
 
+    return wrapper
 
 def check_book_exists_before_removal(func):
     def wrapper(self, book_to_remove, *args, **kwargs):
         if not isinstance(book_to_remove, Book):
-            print(f"[BOOK_REMOVAL_ERROR] Об'єкт для видалення не є книгою (тип: {type(book_to_remove)}). Видалення неможливе.")
             return None
 
         if book_to_remove in self._books:
@@ -25,6 +23,20 @@ def check_book_exists_before_removal(func):
         else:
             print(f"[BOOK_REMOVAL_ERROR] Книгу '{book_to_remove.name}' ({book_to_remove.author}) не знайдено в бібліотеці.")
             return None
+    return wrapper
+
+def check_book_exists_before_addition(func):
+    def wrapper(self, book, *args, **kwargs):
+        if not isinstance(book, Book):
+            print(
+                f"[BOOK_ADDITION_ERROR] Об'єкт даного типу неможливо додати до бібліотеки ({type(book)}).")
+            return None
+
+        if book in self._books:
+            print(f"[BOOK_ADDITION_ERROR] Книга '{book.name}' ({book.author}) вже є в бібліотеці.")
+            return None
+        else:
+            return func(self, book, *args, **kwargs)
     return wrapper
 
 
@@ -97,6 +109,7 @@ class Library:
         if not found_any:
             print(f"Книг автора '{author_name}' не знайдено.")
 
+    @check_book_exists_before_addition
     @log_book_addition
     def add_book(self, book: Book):
         self._books.append(book)
@@ -109,4 +122,49 @@ class Library:
     def get_books(self) -> list[Book]:
         # Повертаємо копію списку книг
         return self._books[:]
+
+    def import_from_file(self, path: str):
+        with FileOpener(path, 'r') as file:
+            try:
+                for line in file:
+                    try:
+                        book_data = json.loads(line.strip())
+                        book_model = BookModel(**book_data)
+                        book = Book(book_model)
+                        self.add_book(book)
+                    except json.JSONDecodeError:
+                        print(f"[IMPORT_ERROR] Неправильний формат JSON в рядку: {line}")
+                    except Exception as e:
+                        print(f"[IMPORT_ERROR] Помилка при імпорті книги: {e}")
+            except Exception as e:
+                print(f"[IMPORT_ERROR] Помилка при читанні файлу: {e}")
+
+    def export_to_file(self, path: str):
+        with FileOpener(path, 'w') as file:
+            try:
+                for book in self._books:
+                    book_data = {
+                        "title": book.name,
+                        "author": book.author,
+                        "year": book.year
+                    }
+                    json_line = json.dumps(book_data, ensure_ascii=False)
+                    file.write(json_line + '\n')
+            except Exception as e:
+                print(f"[EXPORT_ERROR] Помилка при експорті книг: {e}")
+
+
+class FileOpener:
+    def __init__(self, filename, mode):
+        self.filename = filename
+        self.mode = mode
+        self.file = None
+
+    def __enter__(self):
+        self.file = open(self.filename, self.mode, encoding='utf-8')
+        return self.file
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.file.close()
+
 
