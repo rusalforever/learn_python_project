@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Json Title 1",
+    "author": "Json Author 1",
+    "year": 2020,
+    "type": "Journal"
+  },
+  {
+    "title": "Json Title 2",
+    "author": "Json Author 3",
+    "year": 2020,
+    "type": "Book"
+  }
+]
