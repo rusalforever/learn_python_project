@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "type": "book",
+      "title": "1984",
+      "author": "George Orwell",
+      "year": 1949
+    },
+    {
+      "type": "book",
+      "title": "Animal farm",
+      "author": "George Orwell",
+      "year": 1945
+    },
+    {
+      "type": "book",
+      "title": "Brave New World",
+      "author": "Aldous Huxley",
+      "year": 1932
+    },
+    {
+      "type": "magazine",
+      "title": "Sports Illustrated",
+      "author": "Alex Author",
+      "year": 1932,
+      "issue": 2,
+      "month": "January"
+    }
+  ]
+}
